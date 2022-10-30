@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import TextInput from './TextInput';
 import { useField } from 'formik';
@@ -10,6 +10,7 @@ export default function FormikTextInput({ name, ...props }) {
     <View>
       <TextInput
         onChangeText = {(value) => helper.setValue(value) }
+        style = {styles.input}
 
         onBlur = {() => helper.setTouched(true)}
         value = {field.value}
@@ -23,3 +24,14 @@ export default function FormikTextInput({ name, ...props }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+
+  input: {
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+    borderRadius: 5,
+    padding: 5,
+    margin: 10,
+  },
+});

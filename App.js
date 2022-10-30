@@ -1,7 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import RootNavigator from './src/Navigation';
-import { Text } from 'react-native';
 import {
   QueryClient,
   QueryClientProvider
