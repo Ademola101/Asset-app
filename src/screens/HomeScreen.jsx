@@ -1,9 +1,9 @@
-import { View, FlatList, Button,Text, ActivityIndicator } from 'react-native';
+import { View, FlatList, ActivityIndicator } from 'react-native';
 import React from 'react';
 import CoinsExcerpt from '../Components/CoinsExcerpt';
 import { useFetchCoins } from '../hooks/useFetchCoins';
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
   const { data:coins, isLoading } = useFetchCoins();
 
   const renderItem = ({ item }) => {
@@ -23,13 +23,6 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>
-        <Button
-          title="Go to Details"
-          onPress={() => navigation.navigate('Login')}
-        />
-      </Text>
-
 
       <FlatList
         data = {coins}
