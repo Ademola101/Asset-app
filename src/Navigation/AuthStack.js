@@ -10,7 +10,7 @@ export default function AuthStackNavigator() {
   return (
     <AuthStack.Navigator>
       <AuthStack.Screen name='Login'  component={LoginScreen}/>
-      <AuthStack.Screen name='Sign up' component={SignUpScreen}/>
+      <AuthStack.Screen name='Signup' component={SignUpScreen}/>
     </AuthStack.Navigator>
   );
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import SignUpForm from '../Components/SignUpForm';
+import { auth } from '../../config/firebase';
 
 
 const validationSchema = yup.object().shape({
@@ -31,17 +32,24 @@ const initialValues = {
 };
 
 export default function SignUpScreen({ navigation }) {
+  const handleSignUp = async ({ username, password }) => {
+    try {
+      await auth.createUserWithEmailAndPassword(username, password);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <View>
       <Formik
         initialValues = {initialValues}
-        onSubmit = {values => console.log(values)}
+        onSubmit = {values => handleSignUp({ username: values.username, password: values.password })}
         validationSchema = {validationSchema}
 
 
       >
 
-        {({ handleSubmit }) => <SignUpForm onSubmit = {handleSubmit} />}
+        {({ handleSubmit }) => <SignUpForm handleSubmit={handleSubmit}/>}
 
       </Formik>
       <Pressable onPress={() => navigation.navigate('Login')}>

@@ -4,15 +4,15 @@ import TextInput from './TextInput';
 import { useField } from 'formik';
 
 export default function FormikTextInput({ name, ...props }) {
-  const [field, meta, helper] = useField(name);
+  const [field, meta, helpers] = useField(name);
   const showError = meta.touched && meta.error;
   return (
     <View>
       <TextInput
-        onChangeText = {(value) => helper.setValue(value) }
+        onChangeText = {(value) => helpers.setValue(value) }
         style = {styles.input}
 
-        onBlur = {() => helper.setTouched(true)}
+        onBlur = {() => helpers.setTouched(true)}
         value = {field.value}
         error = {showError}
         {...props}
