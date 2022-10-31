@@ -29,8 +29,9 @@ export default function LoginScreen({ navigation }) {
   const { setUser, User } =  useContext(UserContext);
   const handleSignIn = async ({ username, password }) => {
     try {
-      console.log(username, password);
-      await auth.signInWithEmailAndPassword(username, password);
+      const trimUsername = username.trim();
+      const trimPassword = password.trim();
+      await auth.signInWithEmailAndPassword(trimUsername, trimPassword);
 
       setUser(auth.currentUser.email);
 

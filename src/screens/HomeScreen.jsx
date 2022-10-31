@@ -1,8 +1,9 @@
-import { View, FlatList, ActivityIndicator, Text } from 'react-native';
+import { View, FlatList, ActivityIndicator, Text, Pressable } from 'react-native';
 import React, { useContext } from 'react';
 import CoinsExcerpt from '../Components/CoinsExcerpt';
 import { UserContext } from '../Context/userContext';
 import { useFetchCoins } from '../hooks/useFetchCoins';
+import { auth } from '../../config/firebase';
 
 const HomeScreen = () => {
   const { User } = useContext(UserContext);
@@ -26,9 +27,14 @@ const HomeScreen = () => {
 
   return (
     <View>
-      <Text>
+      <View>
+        <Text>
         Welcome {User.email}
-      </Text>
+        </Text>
+        <Pressable onPress={() => auth.signOut()}>
+          <Text>Sign out</Text>
+        </Pressable>
+      </View>
 
       <FlatList
         data = {coins}
