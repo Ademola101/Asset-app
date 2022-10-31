@@ -1,9 +1,10 @@
 import { View, Pressable, Text } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import LoginForm from '../Components/LoginForm';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { auth } from '../../config/firebase';
+import { UserContext } from '../Context/userContext';
 
 
 const initialValues = {
@@ -24,14 +25,21 @@ const validationSchema = yup.object().shape({
     .required('Password is required'),
 });
 export default function LoginScreen({ navigation }) {
+
+  const { setUser, User } =  useContext(UserContext);
   const handleSignIn = async ({ username, password }) => {
     try {
       console.log(username, password);
       await auth.signInWithEmailAndPassword(username, password);
+
+      setUser(auth.currentUser.email);
+
     } catch (e) {
       console.log(e);
     }
+    console.log(User);
   };
+
 
   return (
     <View>

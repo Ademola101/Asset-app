@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import RootNavigator from './src/Navigation';
+import Routes from './src/Navigation';
 import {
   QueryClient,
   QueryClientProvider
@@ -12,7 +12,7 @@ export default function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <RootNavigator />
+        <Routes />
         <StatusBar style="auto" />
       </QueryClientProvider>
 

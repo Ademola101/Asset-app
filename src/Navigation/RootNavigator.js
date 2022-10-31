@@ -6,14 +6,12 @@ import AuthStackNavigator from './AuthStack';
 import { auth } from '../../config/firebase';
 import { UserContext } from '../Context/userContext';
 import HomeStackNavigator from './HomeStack';
-import AuthenticatedUserProvider from './AuthenticatedUserProvider';
 
 
 const RootNavigator = () => {
 
   const [loading, setLoading] = useState(true);
-  const { user, setUser } = useContext(UserContext);
-
+  const { setUser, User } = useContext(UserContext);
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async(authenticateduser) => {
       try {
@@ -26,23 +24,33 @@ const RootNavigator = () => {
       }
       return unsubscribe;
 
-    },[ ]
+    }
     );
-  });
+  },[]);
 
   if (loading) {
     return (
-      <View>
-        <ActivityIndicator />
+      <View style = {
+        {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <ActivityIndicator
+          size='large'
+          color='#0000ff'
+
+
+        />
       </View>
     );
   }
   return (
-    <AuthenticatedUserProvider>
-      <NavigationContainer>
-        {user ? <HomeStackNavigator /> : <AuthStackNavigator />}
-      </NavigationContainer>
-    </AuthenticatedUserProvider>
+
+    <NavigationContainer>
+      {User ? <HomeStackNavigator /> : <AuthStackNavigator />}
+    </NavigationContainer>
+
   );
 };
 

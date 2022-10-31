@@ -1,9 +1,12 @@
-import { View, FlatList, ActivityIndicator } from 'react-native';
-import React from 'react';
+import { View, FlatList, ActivityIndicator, Text } from 'react-native';
+import React, { useContext } from 'react';
 import CoinsExcerpt from '../Components/CoinsExcerpt';
+import { UserContext } from '../Context/userContext';
 import { useFetchCoins } from '../hooks/useFetchCoins';
 
 const HomeScreen = () => {
+  const { User } = useContext(UserContext);
+  console.log(User.email);
   const { data:coins, isLoading } = useFetchCoins();
 
   const renderItem = ({ item }) => {
@@ -23,6 +26,9 @@ const HomeScreen = () => {
 
   return (
     <View>
+      <Text>
+        Welcome {User.email}
+      </Text>
 
       <FlatList
         data = {coins}
