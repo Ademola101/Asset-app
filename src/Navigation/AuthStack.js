@@ -9,7 +9,17 @@ export default function AuthStackNavigator() {
 
   return (
     <AuthStack.Navigator>
-      <AuthStack.Screen name='Login'  component={LoginScreen}/>
+      <AuthStack.Screen name='Login'  component={LoginScreen}
+        options = {{
+          headerStyle: {
+            alignItems: 'center',
+            textAlign: 'center'
+          },
+          headerTitleAlign: 'center'
+        }}
+
+
+      />
       <AuthStack.Screen name='Signup' component={SignUpScreen}/>
     </AuthStack.Navigator>
   );

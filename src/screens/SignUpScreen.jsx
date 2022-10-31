@@ -1,4 +1,4 @@
-import { View, Pressable,Text } from 'react-native';
+import { View, Pressable,Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -40,7 +40,7 @@ export default function SignUpScreen({ navigation }) {
     }
   };
   return (
-    <View>
+    <View style = {styles.formScreenContainer}>
       <Formik
         initialValues = {initialValues}
         onSubmit = {values => handleSignUp({ username: values.username, password: values.password })}
@@ -52,9 +52,35 @@ export default function SignUpScreen({ navigation }) {
         {({ handleSubmit }) => <SignUpForm handleSubmit={handleSubmit}/>}
 
       </Formik>
+      <Text style = {styles.accountText}> Already have an account? </Text>
       <Pressable onPress={() => navigation.navigate('Login')}>
-        <Text>Already have an account? Sign in</Text>
+        <Text style = {styles.signInText}>Sign in</Text>
       </Pressable>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+
+  formScreenContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+
+  accountText: {
+    fontSize: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+  signInText: {
+    fontSize: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    color: 'blue',
+    textAlign: 'center',
+  },
+});
