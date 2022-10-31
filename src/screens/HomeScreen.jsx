@@ -7,7 +7,6 @@ import { auth } from '../../config/firebase';
 
 const HomeScreen = () => {
   const { User } = useContext(UserContext);
-  console.log(User.email);
   const { data:coins, isLoading } = useFetchCoins();
 
   const renderItem = ({ item }) => {
