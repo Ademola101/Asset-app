@@ -1,4 +1,4 @@
-import { View, Pressable, Text } from 'react-native';
+import { View, Pressable, Text, StyleSheet } from 'react-native';
 import React, { useContext } from 'react';
 import LoginForm from '../Components/LoginForm';
 import { Formik } from 'formik';
@@ -26,7 +26,7 @@ const validationSchema = yup.object().shape({
 });
 export default function LoginScreen({ navigation }) {
 
-  const { setUser, User } =  useContext(UserContext);
+  const { setUser } =  useContext(UserContext);
   const handleSignIn = async ({ username, password }) => {
     try {
       const trimUsername = username.trim();
@@ -43,7 +43,7 @@ export default function LoginScreen({ navigation }) {
 
 
   return (
-    <View>
+    <View style = {styles.formScreenContainer}>
       <Formik
         initialValues = {initialValues}
         onSubmit = {values => handleSignIn({ username: values.username, password: values.password })}
@@ -53,9 +53,39 @@ export default function LoginScreen({ navigation }) {
         {({ handleSubmit }) => <LoginForm onSubmit = {handleSubmit} />}
 
       </Formik>
+      <Text style = {styles.accountText}>Don&apos;t have an account? </Text>
       <Pressable onPress={() => navigation.navigate('Signup')}>
-        <Text>Don&apos;t have an account? Sign up</Text>
+        <Text style = {styles.signUpText}>Sign up</Text>
+
       </Pressable>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+
+
+  accountText: {
+    fontSize: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+  signUpText: {
+    fontSize: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    color: 'blue',
+    textAlign: 'center',
+  },
+
+  formScreenContainer: {
+    backgroundColor: 'white',
+    flex: 1,
+    paddingTop: 100,
+  },
+
+});

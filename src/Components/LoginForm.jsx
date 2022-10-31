@@ -4,10 +4,10 @@ import FormikTextInput from './FormikTextInput';
 
 export default function LoginForm({ onSubmit }) {
   return (
-    <View>
-      <Text> Log in </Text>
-      <FormikTextInput name= 'username' placeholder = 'username'/>
-      <FormikTextInput name= 'password' placeholder = 'password' secureTextEntry = {true}/>
+    <View style = {styles.formContainer}>
+
+      <FormikTextInput name= 'username' placeholder = 'Enter your username'/>
+      <FormikTextInput name= 'password' placeholder = 'Enter your password' secureTextEntry = {true}/>
       <Pressable onPress = {onSubmit}>
         <Text
           style = {styles.loginButton}
@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
     fontSize: 15,
+  },
+
+  formContainer: {
+    padding: 10,
   },
 }
 );
