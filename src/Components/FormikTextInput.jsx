@@ -19,6 +19,7 @@ export default function FormikTextInput({ name, ...props }) {
         error = {showError}
         {...props}
 
+
       />
       {showError && (<Text style = {styles.errorText}> {meta.error}</Text>) }
 

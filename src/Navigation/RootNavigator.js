@@ -1,13 +1,25 @@
 
 import React, { useEffect, useContext, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer,
+  DefaultTheme,
+  DarkTheme, } from '@react-navigation/native';
 import { ActivityIndicator, View } from 'react-native';
 import AuthStackNavigator from './AuthStack';
 import { auth } from '../../config/firebase';
 import { UserContext } from '../Context/userContext';
 import HomeStackNavigator from './HomeStack';
+import {
+} from '@react-navigation/native';
 
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'black',
+    text: 'hsl(0deg 0% 100%)',
 
+  }
+};
 const RootNavigator = () => {
 
   const [loading, setLoading] = useState(true);
@@ -47,7 +59,11 @@ const RootNavigator = () => {
   }
   return (
 
-    <NavigationContainer>
+    <NavigationContainer
+      theme={MyTheme}
+
+    >
+
       {User ? <HomeStackNavigator /> : <AuthStackNavigator />}
     </NavigationContainer>
 

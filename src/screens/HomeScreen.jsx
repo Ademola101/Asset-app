@@ -1,10 +1,13 @@
-import { View, FlatList, ActivityIndicator, Text, Pressable } from 'react-native';
+import { View, FlatList, ActivityIndicator, Text, Pressable, StyleSheet } from 'react-native';
 import React, { useContext } from 'react';
 import CoinsExcerpt from '../Components/CoinsExcerpt';
 import { UserContext } from '../Context/userContext';
 import { useFetchCoins } from '../hooks/useFetchCoins';
 import { auth } from '../../config/firebase';
 
+
+
+const ItemSeparator = () => <View style={styles.separator} />;
 const HomeScreen = () => {
   const { User } = useContext(UserContext);
   const { data:coins, isLoading } = useFetchCoins();
@@ -39,11 +42,20 @@ const HomeScreen = () => {
         data = {coins}
         renderItem  = {renderItem}
         keyExtractor = {item => item.id}
+        ItemSeparatorComponent = {ItemSeparator}
 
       />
 
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+
+
+  separator: {
+    height: 10,
+  },
+});
 
 export default HomeScreen;
