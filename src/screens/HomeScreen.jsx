@@ -4,25 +4,21 @@ import CoinsExcerpt from '../Components/CoinsExcerpt';
 import { UserContext } from '../Context/userContext';
 import { useFetchCoins } from '../hooks/useFetchCoins';
 import { auth } from '../../config/firebase';
-import { useFetchMarketData } from '../hooks/useFetchCoins';
 
 
 
 const ItemSeparator = () => <View style={styles.separator} />;
-const HomeScreen = ({ navigate }) => {
+const HomeScreen = ({ navigation }) => {
   const { User } = useContext(UserContext);
   const { data:coins, isLoading } = useFetchCoins();
 
 
   const renderItem = ({ item }) => {
-    const id = item.id;
-    const { data:marketData } = useFetchMarketData(id);
+
     return (
-      <Pressable onPress={
-        () => navigate('CoinDetails', { coin: item, marketData: marketData })
-      }>
-        <CoinsExcerpt coin={item}/>
-      </Pressable>
+
+      <CoinsExcerpt coin={item} navigation = {navigation}/>
+
     );
 
   };

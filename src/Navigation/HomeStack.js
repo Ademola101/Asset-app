@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
-
-
+import CoinDetailsScreen from '../screens/CoinDetailsScreen';
 const HomeStack  = createNativeStackNavigator();
 
 export default function HomeStackNavigator ()  {
@@ -11,6 +10,7 @@ export default function HomeStackNavigator ()  {
     >
 
       <HomeStack.Screen name = 'Home' component={HomeScreen}/>
+      <HomeStack.Screen name = 'CoinDetails' component={CoinDetailsScreen}/>
     </HomeStack.Navigator>
   );
 }
