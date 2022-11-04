@@ -1,14 +1,18 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image,} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AntIcon from 'react-native-vector-icons/AntDesign';
 
-const DeltaIcon = ({ color }) => <Icon name="delta" size={20} color= {color} />;
+
+const DeltaIcon = () => <Icon name="delta" size={20} color= 'green' backgroundColor = 'green' />;
+const DownArorw = () => <AntIcon name="caretdown" size={20} color= 'red' />;
 const CoinsExcerpt = ({ coin }) => {
 
   const currency_format = (num) => {
     return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
   };
   return (
+
     <View style = {styles.container}>
       <View style = {styles.namecontainer}>
 
@@ -33,10 +37,18 @@ const CoinsExcerpt = ({ coin }) => {
           {currency_format(coin.current_price)}
         </Text>
       </View>
-      <View >
-        <DeltaIcon color={coin.price_change_percentage_24h < 0 ? 'red' : 'green'}/>
+      <View style = {styles.changecontainer}>
+        {coin.price_change_percentage_24h > 0 ? <DeltaIcon /> : <DownArorw />}
+        <Text
+          style = {styles.chnagetext}
+
+        >
+          {coin.price_change_percentage_24h.toFixed(2)}%
+        </Text>
+
       </View>
     </View>
+
   );
 };
 
@@ -60,10 +72,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginLeft: 10,
 
+
   },
 
   name:{
     color: 'white',
+    flexShrink: 1,
+    flex: 1,
   },
 
   symbol:{
@@ -85,6 +100,17 @@ const styles = StyleSheet.create({
 
   pricecontainer: {
     flex: 1,
+  },
+
+  changecontainer: {
+    flexDirection: 'row',
+    color: 'white',
+
+  },
+
+  chnagetext: {
+    color: 'white',
+    marginLeft: 5,
   },
 
 
