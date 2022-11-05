@@ -7,11 +7,29 @@ export default function HomeStackNavigator ()  {
   return (
     <HomeStack.Navigator
       initialRouteName="Home"
+      screenOptions={{
+        headerStyle:{
+          backgroundColor: '#141414',
+
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+
+
+      }}
+
     >
 
       <HomeStack.Screen name = 'Home' component={HomeScreen}/>
       <HomeStack.Screen name = 'CoinDetails' component={CoinDetailsScreen}
-        options={({ route }) => ({ title: route.params.coin.name })}
+        options={({ route }) => ({ title: route.params.coin.name,
+          // headerStyle: {
+          //   backgroundColor: '#3c3c3c',
+          // },
+
+        })}
 
       />
     </HomeStack.Navigator>
