@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { useRoute } from '@react-navigation/native';
 import { LineChart, Grid }  from  'react-native-svg-charts';
 export default function CoinDetailsScreen() {
   const route = useRoute();
-  const {  marketData } = route.params;
+  const {  marketData, coin } = route.params;
+  console.log(marketData);
   const priceAndDate = marketData.prices.map((item) => {
     return {
       price: item[1],
@@ -15,7 +16,9 @@ export default function CoinDetailsScreen() {
   console.log(priceAndDate);
   return (
     <View>
-      <Text>CoinDetails</Text>
+      <Text style = {styles.header}>{
+        coin.name
+      } price </Text>
 
       <LineChart
         style={{ height: 200 }}
@@ -28,3 +31,13 @@ export default function CoinDetailsScreen() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+
+  header: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 10,
+    color: 'white',
+  },
+});

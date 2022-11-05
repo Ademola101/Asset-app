@@ -16,7 +16,8 @@ const CoinsExcerpt = ({ coin, navigation }) => {
   };
   return (
 
-    <Pressable  onPress = {() => navigation.navigate('CoinDetails', { marketData })}>
+    <Pressable  onPress = {() => navigation.navigate('CoinDetails', { marketData, coin })}>
+
 
       <View style = {styles.container}>
         <View style = {styles.namecontainer}>
