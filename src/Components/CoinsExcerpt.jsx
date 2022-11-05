@@ -3,7 +3,6 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import { useFetchMarketData } from '../hooks/useFetchCoins';
-import { useNavigation } from '@react-navigation/native';
 
 
 const DeltaIcon = () => <Icon name="delta" size={20} color= 'green' backgroundColor = 'green' />;

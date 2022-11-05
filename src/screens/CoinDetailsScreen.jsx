@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 import { useRoute } from '@react-navigation/native';
-
+import { LineChart, Grid }  from  'react-native-svg-charts';
 export default function CoinDetailsScreen() {
   const route = useRoute();
   const {  marketData } = route.params;
@@ -16,7 +16,15 @@ export default function CoinDetailsScreen() {
   return (
     <View>
       <Text>CoinDetails</Text>
-      <Text></Text>
+
+      <LineChart
+        style={{ height: 200 }}
+        data={priceAndDate.map((item) => item.price)}
+        svg={{ stroke: 'rgb(134, 65, 244)' }}
+        contentInset={{ top: 20, bottom: 20 }}
+      >
+        <Grid />
+      </LineChart>
     </View>
   );
 }
