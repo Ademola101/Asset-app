@@ -1,10 +1,11 @@
 import { View, Pressable, Text, StyleSheet } from 'react-native';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import LoginForm from '../Components/LoginForm';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { auth } from '../../config/firebase';
 import { UserContext } from '../Context/userContext';
+import Notification from '../Components/Notification';
 
 
 const initialValues = {
@@ -25,7 +26,7 @@ const validationSchema = yup.object().shape({
     .required('Password is required'),
 });
 export default function LoginScreen({ navigation }) {
-
+  const [errormessage, setErrormessage] = useState(null);
   const { setUser } =  useContext(UserContext);
   const handleSignIn = async ({ username, password }) => {
     try {
@@ -37,6 +38,7 @@ export default function LoginScreen({ navigation }) {
 
     } catch (e) {
       console.log(e);
+      setErrormessage('Invalid username or password');
     }
 
   };
@@ -44,20 +46,33 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style = {styles.formScreenContainer}>
+
       <Formik
         initialValues = {initialValues}
         onSubmit = {values => handleSignIn({ username: values.username, password: values.password })}
         validationSchema = {validationSchema}
       >
 
-        {({ handleSubmit }) => <LoginForm onSubmit = {handleSubmit} />}
+        {({ handleSubmit, isSubmitting }) => {
+          return ( <>
+            <Notification errormessage={errormessage} />
+            <LoginForm onSubmit={handleSubmit} isSubmitting={isSubmitting} />
+            <Text style = {styles.accountText}>Don&apos;t have an account? </Text>
+            <Pressable onPress={() => navigation.navigate('Signup')}>
+              <Text style = {styles.signUpText}>Sign up</Text>
+
+            </Pressable>
+          </>
+          );
+        }
+
+        }
+
+
+
 
       </Formik>
-      <Text style = {styles.accountText}>Don&apos;t have an account? </Text>
-      <Pressable onPress={() => navigation.navigate('Signup')}>
-        <Text style = {styles.signUpText}>Sign up</Text>
 
-      </Pressable>
     </View>
   );
 }

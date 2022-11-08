@@ -1,18 +1,20 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet, ActivityIndicator } from 'react-native';
 import React from 'react';
 import FormikTextInput from './FormikTextInput';
 
-export default function LoginForm({ onSubmit }) {
+export default function LoginForm({ onSubmit, isSubmitting }) {
+
   return (
     <View style = {styles.formContainer}>
 
       <FormikTextInput name= 'username' placeholder = 'Enter your username'/>
       <FormikTextInput name= 'password' placeholder = 'Enter your password' secureTextEntry = {true}/>
       <Pressable onPress = {onSubmit}>
+
         <Text
           style = {styles.loginButton}
 
-        >Login</Text>
+        > {isSubmitting && <ActivityIndicator size = 'small' color = 'white'/>}Login</Text>
       </Pressable>
 
     </View>
@@ -36,5 +38,8 @@ const styles = StyleSheet.create({
   formContainer: {
     padding: 10,
   },
+
+
+
 }
 );

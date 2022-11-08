@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import { useFetchMarketData } from '../hooks/useFetchCoins';
@@ -59,7 +59,7 @@ const CoinsExcerpt = ({ coin, navigation }) => {
   );
 };
 
-export default CoinsExcerpt;
+export default memo(CoinsExcerpt);
 
 const styles = StyleSheet.create({
 
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 10,
     flexDirection: 'row',
+    height: 60,
 
   },
 
