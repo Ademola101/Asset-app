@@ -15,14 +15,24 @@ export default function CoinDetailsScreen() {
     };
   });
 
-  console.log(priceAndDate.map((item) => item.date));
+
 
   return (
     <View>
+      <View>
+        <Text style = {styles.header}>{
+          coin.name
+        } price </Text>
 
-      <Text style = {styles.header}>{
-        coin.name
-      } price </Text>
+        <Text style = {styles.price}>
+
+          {
+            `$${coin.current_price}`
+          }
+
+        </Text>
+      </View>
+
       <Text>
         <YAxis
           data={priceAndDate.map((item) => item.price)}
@@ -112,4 +122,12 @@ const styles = StyleSheet.create({
     margin: 10,
     color: 'white',
   },
+
+  price : {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: 'white',
+    margin: 10,
+
+  }
 });
