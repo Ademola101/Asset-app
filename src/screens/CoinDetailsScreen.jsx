@@ -2,15 +2,18 @@ import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { useRoute } from '@react-navigation/native';
 import { LineChart, Grid, YAxis, XAxis }  from  'react-native-svg-charts';
+import { format } from 'date-fns';
 export default function CoinDetailsScreen() {
   const route = useRoute();
   const {  marketData, coin } = route.params;
   const priceAndDate = marketData.prices.map((item) => {
     return {
       price: item[1],
-      date: new Date(item[0]).toLocaleDateString(),
+      date: new Date(item[0])
     };
   });
+
+  console.log(priceAndDate.map((item) => item.date));
 
   return (
     <View>
@@ -56,14 +59,34 @@ export default function CoinDetailsScreen() {
 
         </LineChart>
         <XAxis
-          style={{ marginHorizontal: -10,
-            height: 300,
+          style={{ marginHorizontal: -50,
+
             width: 300,
+            height: 50,
+            alignSelf: 'center',
+
+
+
+
           }}
           data={priceAndDate.map((item) => item.date)}
-          formatLabel={(value, index) => index}
-          contentInset={{ left: 10, right: 10 }}
-          svg={{ fontSize: 10, fill: 'grey', }}
+          formatLabel={(value) => format(value, 'dd/MM')}
+          contentInset={{ left: 40, right: 40 }}
+          svg={{ fontSize: 10, fill: 'grey',
+            width: 300,
+            height: 50,
+
+
+          }}
+
+          numberOfTicks={10}
+
+          transform={{ translateY: 200,
+
+
+          }}
+
+
         />
       </Text>
 
