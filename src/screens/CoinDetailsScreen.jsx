@@ -3,6 +3,8 @@ import React from 'react';
 import { useRoute } from '@react-navigation/native';
 import { LineChart, Grid, YAxis, XAxis }  from  'react-native-svg-charts';
 import { format } from 'date-fns';
+import * as scale from 'd3-scale';
+import * as shape from 'd3-shape';
 export default function CoinDetailsScreen() {
   const route = useRoute();
   const {  marketData, coin } = route.params;
@@ -65,16 +67,22 @@ export default function CoinDetailsScreen() {
             height: 50,
             alignSelf: 'center',
 
+            originY: 30,
+            y: 5,
+
 
 
 
           }}
+          curve={shape.curveNatural}
+          scale = {scale.scaleTime}
           data={priceAndDate.map((item) => item.date)}
           formatLabel={(value) => format(value, 'dd/MM')}
           contentInset={{ left: 40, right: 40 }}
           svg={{ fontSize: 10, fill: 'grey',
             width: 300,
             height: 50,
+
 
 
           }}
