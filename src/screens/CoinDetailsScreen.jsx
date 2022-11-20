@@ -80,9 +80,6 @@ export default function CoinDetailsScreen() {
             originY: 30,
             y: 5,
 
-
-
-
           }}
           curve={shape.curveNatural}
           scale = {scale.scaleTime}
@@ -92,9 +89,6 @@ export default function CoinDetailsScreen() {
           svg={{ fontSize: 10, fill: 'grey',
             width: 300,
             height: 50,
-
-
-
           }}
 
           numberOfTicks={10}
