@@ -1,7 +1,7 @@
 import { View, TextInput as NativeTextInput } from 'react-native';
 import React from 'react';
 
-const TextInput = ({ style, error, ...props }) => {
+const TextInput = ({ style, ...props }) => {
   const NativeInputTextStyle = [style];
   return (
     <View>

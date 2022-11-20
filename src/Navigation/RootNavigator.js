@@ -1,8 +1,6 @@
 
 import React, { useEffect, useContext, useState } from 'react';
-import { NavigationContainer,
-  DefaultTheme,
-  DarkTheme, } from '@react-navigation/native';
+import { NavigationContainer,DefaultTheme } from '@react-navigation/native';
 import { ActivityIndicator, View } from 'react-native';
 import AuthStackNavigator from './AuthStack';
 import { auth } from '../../config/firebase';

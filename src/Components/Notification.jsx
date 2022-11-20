@@ -4,11 +4,20 @@ import React from 'react';
 const Notification = ({ errormessage }) => {
   return (
     <View>
-      <Text>{errormessage}</Text>
+      <Text styles  = {styles.notification}>{errormessage}</Text>
     </View>
   );
 };
 
 export default Notification;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+
+  notification: {
+    color: 'red',
+    fontSize: 15,
+    fontWeight: 'bold',
+    textAlign: 'center',
+
+  }
+});
