@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: 'red',
+    backgroundColor: 'black',
   },
 
   signoutText: {
