@@ -6,8 +6,6 @@ import AuthStackNavigator from './AuthStack';
 import { auth } from '../../config/firebase';
 import { UserContext } from '../Context/userContext';
 import HomeStackNavigator from './HomeStack';
-import {
-} from '@react-navigation/native';
 
 const MyTheme = {
   ...DefaultTheme,
