@@ -13,21 +13,11 @@ const HomeScreen = ({ navigation }) => {
 
   const [iconState, setIconState] = useState(true);
   const { User } = useContext(UserContext);
+
+  const emailName = User.email?.split('@')[0].toUpperCase();
   const { data:coins, isLoading, isFetching, refetch } = useFetchCoins();
-  const onRefresh = () => {
-    refetch();
-  };
-
-  const renderItem = ({ item }) => {
-
-    return (
-
-      <CoinsExcerpt coin={item} navigation = {navigation}/>
-
-    );
-
-  };
-
+  const onRefresh = () =>  refetch();
+  const renderItem = ({ item }) =>  <CoinsExcerpt coin={item} navigation = {navigation}/>;
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -39,8 +29,8 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View>
       <View>
-        <Text>
-        Welcome {User.email}
+        <Text style = {styles.welcome}>
+        Welcome {emailName}
         </Text>
         <View style = {styles.signOutView}>
           { iconState ? (<Pressable onPress = {() => setIconState(false)}>
@@ -88,6 +78,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
 
 
+  },
+
+  welcome:{
+    color: 'white',
+    fontSize: 20,
+    padding: 10
   }
 });
 
