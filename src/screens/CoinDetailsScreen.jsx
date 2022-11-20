@@ -79,7 +79,6 @@ export default function CoinDetailsScreen() {
 
             originY: 30,
             y: 5,
-
           }}
           curve={shape.curveNatural}
           scale = {scale.scaleTime}
