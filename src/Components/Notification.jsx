@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
   notification: {
     color: 'red',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
 
