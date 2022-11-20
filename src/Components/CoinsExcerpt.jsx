@@ -3,8 +3,6 @@ import React, { memo } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import { useFetchMarketData } from '../hooks/useFetchCoins';
-
-
 const DeltaIcon = () => <Icon name="delta" size={20} color= 'green' backgroundColor = 'green' />;
 const DownArorw = () => <AntIcon name="caretdown" size={20} color= 'red' />;
 

@@ -1,14 +1,17 @@
 import { View, FlatList, ActivityIndicator, Text, Pressable, StyleSheet, RefreshControl } from 'react-native';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import IoLogOutOutline from 'react-native-vector-icons/Ionicons';
 import CoinsExcerpt from '../Components/CoinsExcerpt';
 import { UserContext } from '../Context/userContext';
 import { useFetchCoins } from '../hooks/useFetchCoins';
 import { auth } from '../../config/firebase';
 
 
-
+const SignOutIcon = () => <IoLogOutOutline name="log-out-outline" size={20} color="white" />;
 const ItemSeparator = () => <View style={styles.separator} />;
 const HomeScreen = ({ navigation }) => {
+
+  const [iconState, setIconState] = useState(true);
   const { User } = useContext(UserContext);
   const { data:coins, isLoading, isFetching, refetch } = useFetchCoins();
   const onRefresh = () => {
@@ -39,9 +42,15 @@ const HomeScreen = ({ navigation }) => {
         <Text>
         Welcome {User.email}
         </Text>
-        <Pressable onPress={() => auth.signOut()}>
-          <Text>Sign out</Text>
-        </Pressable>
+        <View style = {styles.signOutView}>
+          { iconState ? (<Pressable onPress = {() => setIconState(false)}>
+            <SignOutIcon />
+          </Pressable>) : (<Pressable onPress={() => auth.signOut()}>
+            <Text style = {styles.signoutText} >Sign out</Text>
+          </Pressable>
+          ) }
+
+        </View>
       </View>
 
       <FlatList
@@ -65,6 +74,21 @@ const styles = StyleSheet.create({
   separator: {
     height: 10,
   },
+
+  signOutView: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: 'red',
+  },
+
+  signoutText: {
+    color: 'white',
+    fontSize: 20,
+
+
+  }
 });
 
 export default HomeScreen;
