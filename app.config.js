@@ -25,8 +25,8 @@ export default {
       foregroundImage: './assets/adaptive-icon.png',
       backgroundColor: '#FFFFFF'
     },
-    package: 'com.example.assetapp',
-    versionCode: 1
+    package: 'com.preview.assetapp',
+    versionCode: 1.1
   },
   web: {
     favicon: './assets/favicon.png'
