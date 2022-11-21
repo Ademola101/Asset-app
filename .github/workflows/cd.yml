@@ -16,11 +16,6 @@ jobs:
             exit 1
           fi
 
-      - name: "Set ENV"
-        run: echo "$(BASE_URL)"     
-        env:
-          BASE_URL: https://exampleapp.com    
-
       - name: Checkout repository
         uses: actions/checkout@v2
 
