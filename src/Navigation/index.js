@@ -7,5 +7,4 @@ export default function Routes() {
     <AuthenticatedUserProvider>
       <RootNavigator/>
     </AuthenticatedUserProvider>);
-
 }
