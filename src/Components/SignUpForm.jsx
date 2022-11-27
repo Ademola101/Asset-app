@@ -5,7 +5,7 @@ const SignUpForm = ({ handleSubmit }) => {
   return (
     <View>
       <Text style = {styles.createNewText}>Create new account</Text>
-      <FormikTextInput name='username' placeholder='Enter your username' />
+      <FormikTextInput name='email' placeholder='Enter your email' />
       <FormikTextInput name='password' placeholder='Enter your password' secureTextEntry={true} />
       <FormikTextInput name='passwordConfirmation' placeholder='Password confirmation' secureTextEntry={true} />
 

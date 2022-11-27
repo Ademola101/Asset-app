@@ -7,7 +7,7 @@ export default function LoginForm({ onSubmit, isSubmitting }) {
   return (
     <View style = {styles.formContainer}>
 
-      <FormikTextInput name= 'username' placeholder = 'Enter your username'/>
+      <FormikTextInput name= 'username' placeholder = 'Enter your email'/>
       <FormikTextInput name= 'password' placeholder = 'Enter your password' secureTextEntry = {true}/>
       <Pressable onPress = {onSubmit}>
 
