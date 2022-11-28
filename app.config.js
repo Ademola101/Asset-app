@@ -26,7 +26,7 @@ export default {
       backgroundColor: '#FFFFFF'
     },
     package: 'com.preview.assetapp',
-    versionCode: 3
+    versionCode: 4
   },
   web: {
     favicon: './assets/favicon.png'
