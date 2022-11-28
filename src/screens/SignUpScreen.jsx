@@ -1,17 +1,15 @@
 import { View, Pressable,Text, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import SignUpForm from '../Components/SignUpForm';
 import { auth } from '../../config/firebase';
+import Notification from '../Components/Notification';
 
 
 const validationSchema = yup.object().shape({
-  username: yup
-    .string()
-    .min(1, 'Username must be at least 1 character')
-    .max(30, 'Username must be at most 30 characters')
-    .required('Username is required'),
+  email: yup
+    .string().email('Valid email address required').required('Email is required'),
   password: yup
     .string()
     .min(5, 'Password must be at least 5 characters')
@@ -26,36 +24,53 @@ const validationSchema = yup.object().shape({
 });
 
 const initialValues = {
-  username: '',
+  email: '',
   password: '',
   passwordConfirmation: '',
 };
 
 export default function SignUpScreen({ navigation }) {
-  const handleSignUp = async ({ username, password }) => {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const handleSignUp = async ({ email, password }) => {
     try {
-      await auth.createUserWithEmailAndPassword(username, password);
+      await auth.createUserWithEmailAndPassword(email, password);
     } catch (e) {
+
       console.log(e);
+      if (e.code === 'auth/email-already-in-use') {
+        setErrorMessage('Email address is already in use');
+      } else if (e.code === 'auth/invalid-email') {
+        setErrorMessage('Email address is invalid');
+      }
+      else {
+        setErrorMessage(e.message);
+      }
     }
   };
   return (
     <View style = {styles.formScreenContainer}>
+
       <Formik
         initialValues = {initialValues}
-        onSubmit = {values => handleSignUp({ username: values.username, password: values.password })}
+        onSubmit = {values => handleSignUp({ email: values.email, password: values.password })}
         validationSchema = {validationSchema}
-
-
       >
+        {({ handleSubmit }) => {
+          return (
+            <>
+              <Notification errormessage={errorMessage} />
+              <SignUpForm onSubmit={handleSubmit} />
+            </>
+          );
+        }}
 
-        {({ handleSubmit }) => <SignUpForm handleSubmit={handleSubmit}/>}
 
       </Formik>
       <Text style = {styles.accountText}> Already have an account? </Text>
       <Pressable onPress={() => navigation.navigate('Login')}>
         <Text style = {styles.signInText}>Sign in</Text>
       </Pressable>
+
     </View>
   );
 }

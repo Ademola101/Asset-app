@@ -9,16 +9,13 @@ import Notification from '../Components/Notification';
 
 
 const initialValues = {
-  username: '',
+  email: '',
   password: '',
 };
 
 const validationSchema = yup.object().shape({
-  username: yup
-    .string()
-    .min(1, 'Username must be at least 1 character')
-    .max(30, 'Username must be at most 30 characters')
-    .required('Username is required'),
+  email: yup
+    .string().email('Email must be a valid email').required('Email is required'),
   password: yup
     .string()
     .min(5, 'Password must be at least 5 characters')
@@ -28,17 +25,17 @@ const validationSchema = yup.object().shape({
 export default function LoginScreen({ navigation }) {
   const [errormessage, setErrormessage] = useState(null);
   const { setUser } =  useContext(UserContext);
-  const handleSignIn = async ({ username, password }) => {
+  const handleSignIn = async ({ email, password }) => {
     try {
-      const trimUsername = username.trim();
+      const trimEmail = email.trim();
       const trimPassword = password.trim();
-      await auth.signInWithEmailAndPassword(trimUsername, trimPassword);
+      await auth.signInWithEmailAndPassword(trimEmail, trimPassword);
 
       setUser(auth.currentUser.email);
 
     } catch (e) {
       console.log(e);
-      setErrormessage('Invalid username or password');
+      setErrormessage('Invalid Email or password');
     }
 
   };
@@ -49,7 +46,7 @@ export default function LoginScreen({ navigation }) {
 
       <Formik
         initialValues = {initialValues}
-        onSubmit = {values => handleSignIn({ username: values.username, password: values.password })}
+        onSubmit = {values => handleSignIn({ email: values.email, password: values.password })}
         validationSchema = {validationSchema}
       >
 
