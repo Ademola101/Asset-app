@@ -58,8 +58,9 @@ export default function SignUpScreen({ navigation }) {
         {({ handleSubmit }) => {
           return (
             <>
+
+              <SignUpForm handleSubmit={handleSubmit} />
               <Notification errormessage={errorMessage} />
-              <SignUpForm onSubmit={handleSubmit} />
             </>
           );
         }}
