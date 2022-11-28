@@ -1,17 +1,20 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet, ActivityIndicator } from 'react-native';
 import React from 'react';
 import FormikTextInput from './FormikTextInput';
-const SignUpForm = ({ handleSubmit }) => {
+const SignUpForm = ({ handleSubmit, children, isSubmitting }) => {
+
   return (
     <View>
       <Text style = {styles.createNewText}>Create new account</Text>
+      {children}
       <FormikTextInput name='email' placeholder='Enter your email' />
       <FormikTextInput name='password' placeholder='Enter your password' secureTextEntry={true} />
       <FormikTextInput name='passwordConfirmation' placeholder='Password confirmation' secureTextEntry={true} />
 
       <Pressable onPress={handleSubmit}>
-        <Text style = {styles.signUpButton}>Sign up</Text>
+        <Text style = {styles.signUpButton}>{isSubmitting && <ActivityIndicator/>} Sign up</Text>
       </Pressable>
+
     </View>
   );
 };

@@ -4,7 +4,7 @@ export default {
   slug: 'asset-app',
   version: '1.0.0',
   orientation: 'portrait',
-  icon: './assets/icon.png',
+  icon: './assets/icon2.png',
   userInterfaceStyle: 'automatic',
   splash: {
     image: './assets/splash.png',

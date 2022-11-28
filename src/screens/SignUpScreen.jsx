@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import SignUpForm from '../Components/SignUpForm';
 import { auth } from '../../config/firebase';
 import Notification from '../Components/Notification';
+import showToast from '../utils/showToast';
 
 
 const validationSchema = yup.object().shape({
@@ -34,6 +35,7 @@ export default function SignUpScreen({ navigation }) {
   const handleSignUp = async ({ email, password }) => {
     try {
       await auth.createUserWithEmailAndPassword(email, password);
+      showToast('Sign up successful');
     } catch (e) {
 
       console.log(e);
@@ -55,12 +57,14 @@ export default function SignUpScreen({ navigation }) {
         onSubmit = {values => handleSignUp({ email: values.email, password: values.password })}
         validationSchema = {validationSchema}
       >
-        {({ handleSubmit }) => {
+        {({ handleSubmit, isSubmitting, }) => {
           return (
             <>
 
-              <SignUpForm handleSubmit={handleSubmit} />
-              <Notification errormessage={errorMessage} />
+              <SignUpForm handleSubmit={handleSubmit} isSubmitting = {isSubmitting}>
+                <Notification errormessage={errorMessage} />
+              </SignUpForm>
+
             </>
           );
         }}

@@ -14,7 +14,7 @@ const HomeScreen = ({ navigation }) => {
   const [iconState, setIconState] = useState(true);
   const { User } = useContext(UserContext);
 
-  const emailName = User.email.split('@')[0].toUpperCase();
+  const emailName = User.email?.split('@')[0].toUpperCase();
 
   const { data:coins, isLoading, isFetching, refetch } = useFetchCoins();
   const onRefresh = () =>  refetch();

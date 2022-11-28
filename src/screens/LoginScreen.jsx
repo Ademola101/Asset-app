@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { auth } from '../../config/firebase';
 import { UserContext } from '../Context/userContext';
 import Notification from '../Components/Notification';
+import showToast from '../utils/showToast';
 
 
 const initialValues = {
@@ -32,10 +33,12 @@ export default function LoginScreen({ navigation }) {
       await auth.signInWithEmailAndPassword(trimEmail, trimPassword);
 
       setUser(auth.currentUser.email);
+      showToast('Login Successful');
 
     } catch (e) {
       console.log(e);
       setErrormessage('Invalid Email or password');
+      // showToast('Invalid Email or password');
     }
 
   };

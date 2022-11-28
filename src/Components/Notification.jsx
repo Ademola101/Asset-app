@@ -4,7 +4,7 @@ import React from 'react';
 const Notification = ({ errormessage }) => {
   return (
     <View>
-      <Text styles  = {styles.notification}>{errormessage}</Text>
+      <Text style  = {styles.notification}>{errormessage}</Text>
     </View>
   );
 };

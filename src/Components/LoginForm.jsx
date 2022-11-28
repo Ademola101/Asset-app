@@ -9,7 +9,7 @@ export default function LoginForm({ onSubmit, isSubmitting }) {
 
       <FormikTextInput name= 'email' placeholder = 'Enter your email'/>
       <FormikTextInput name= 'password' placeholder = 'Enter your password' secureTextEntry = {true}/>
-      <Pressable onPress = {onSubmit}>
+      <Pressable onPress = {onSubmit} disable = {isSubmitting && true}>
 
         <Text
           style = {styles.loginButton}
