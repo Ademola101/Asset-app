@@ -5,19 +5,26 @@ import CoinsExcerpt from '../Components/CoinsExcerpt';
 import { UserContext } from '../Context/userContext';
 import { useFetchCoins } from '../hooks/useFetchCoins';
 import { auth } from '../../config/firebase';
-
+import Search from '../Components/Search';
+import { useDebounce } from 'use-debounce';
 
 const SignOutIcon = () => <IoLogOutOutline name="log-out-outline" size={20} color="white" />;
 const ItemSeparator = () => <View style={styles.separator} />;
 const HomeScreen = ({ navigation }) => {
 
   const [iconState, setIconState] = useState(true);
+  const [search, setSearch] = useState('');
+  const [debounceSearch] = useDebounce(search, 500);
   const { User } = useContext(UserContext);
+  const onChangeText = (value) => {
+    setSearch(value);
 
+  };
   const emailName = User.email?.split('@')[0].toUpperCase();
 
   const { data:coins, isLoading, isFetching, refetch } = useFetchCoins();
   const onRefresh = () =>  refetch();
+  const coinsFiltered = coins?.filter((coin) => coin.name.toLowerCase().includes(debounceSearch.toLowerCase()));
   const renderItem = ({ item }) =>  <CoinsExcerpt coin={item} navigation = {navigation}/>;
   if (isLoading) {
     return (
@@ -42,10 +49,11 @@ const HomeScreen = ({ navigation }) => {
           ) }
 
         </View>
+        <Search value={search} onChange = {onChangeText}/>
       </View>
 
       <FlatList
-        data = {coins}
+        data = {coinsFiltered}
         renderItem  = {renderItem}
         keyExtractor = {item => item.id}
         ItemSeparatorComponent = {ItemSeparator}
