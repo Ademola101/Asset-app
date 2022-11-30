@@ -1,5 +1,5 @@
-import { View, FlatList, ActivityIndicator, Text, Pressable, StyleSheet, RefreshControl } from 'react-native';
-import React, { useContext, useState } from 'react';
+import { View, FlatList, ActivityIndicator, Text, Pressable, StyleSheet, RefreshControl, Animated } from 'react-native';
+import React, { useContext, useState, } from 'react';
 import IoLogOutOutline from 'react-native-vector-icons/Ionicons';
 import CoinsExcerpt from '../Components/CoinsExcerpt';
 import { UserContext } from '../Context/userContext';
@@ -7,7 +7,7 @@ import { useFetchCoins } from '../hooks/useFetchCoins';
 import { auth } from '../../config/firebase';
 import Search from '../Components/Search';
 import { useDebounce } from 'use-debounce';
-
+import useFadeAnim from '../hooks/useFadeAnim';
 const SignOutIcon = () => <IoLogOutOutline name="log-out-outline" size={20} color="white" />;
 const ItemSeparator = () => <View style={styles.separator} />;
 const HomeScreen = ({ navigation }) => {
@@ -20,7 +20,8 @@ const HomeScreen = ({ navigation }) => {
     setSearch(value);
 
   };
-  const emailName = User.email?.split('@')[0].toUpperCase();
+  const fadeAnim = useFadeAnim();
+  const emailName = `${User.email?.split('@')[0].charAt(0).toUpperCase()}${User.email?.split('@')[0].slice(1)}`;
 
   const { data:coins, isLoading, isFetching, refetch } = useFetchCoins();
   const onRefresh = () =>  refetch();
@@ -36,7 +37,11 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View>
-      <View>
+      <Animated.View
+        style = {{
+          opacity: fadeAnim,
+        }}
+      >
         <Text style = {styles.welcome}>
         Welcome {emailName}
         </Text>
@@ -50,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
 
         </View>
         <Search value={search} onChange = {onChangeText}/>
-      </View>
+      </Animated.View>
 
       <FlatList
         data = {coinsFiltered}
@@ -92,7 +97,7 @@ const styles = StyleSheet.create({
   welcome:{
     color: 'white',
     fontSize: 20,
-    padding: 10
+    padding: 10,
   }
 });
 
