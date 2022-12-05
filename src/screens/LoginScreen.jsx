@@ -7,6 +7,7 @@ import { auth } from '../../config/firebase';
 import { UserContext } from '../Context/userContext';
 import Notification from '../Components/Notification';
 import showToast from '../utils/showToast';
+import LoadingModal from '../Components/LoadingModal';
 
 
 const initialValues = {
@@ -54,6 +55,7 @@ export default function LoginScreen({ navigation }) {
       >
 
         {({ handleSubmit, isSubmitting }) => {
+
           return ( <>
             <Notification errormessage={errormessage} />
             <LoginForm onSubmit={handleSubmit} isSubmitting={isSubmitting} />
@@ -62,6 +64,10 @@ export default function LoginScreen({ navigation }) {
               <Text style = {styles.signUpText}>Sign up</Text>
 
             </Pressable>
+            <LoadingModal isVisible={isSubmitting}
+            />
+
+
           </>
           );
         }

@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, Pressable, StyleSheet,  } from 'react-native';
 import React from 'react';
 import FormikTextInput from './FormikTextInput';
 
@@ -14,7 +14,11 @@ export default function LoginForm({ onSubmit, isSubmitting }) {
         <Text
           style = {styles.loginButton}
 
-        > {isSubmitting && <ActivityIndicator size = 'small' color = 'white'/>}Login</Text>
+        >
+
+          {/* {isSubmitting && <ActivityIndicator size = 'small' color = 'white'/>} */}
+
+        Login</Text>
       </Pressable>
 
     </View>
