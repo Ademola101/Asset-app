@@ -22,7 +22,12 @@ export default function HomeStackNavigator ()  {
 
     >
 
-      <HomeStack.Screen name = 'Home' component={HomeScreen}/>
+      <HomeStack.Screen name = 'Home' component={HomeScreen}
+        options = {{
+          headerTitleAlign: 'center',
+        }}
+
+      />
       <HomeStack.Screen name = 'CoinDetails' component={CoinDetailsScreen}
         options={({ route }) => ({ title: route.params.coin.name,
           // headerStyle: {
