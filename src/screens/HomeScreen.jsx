@@ -43,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
         }}
       >
         <Text style = {styles.welcome}>
-        Welcome {emailName}
+        Welcome {User.email ? emailName : 'Guest'}
         </Text>
         <View style = {styles.signOutView}>
           { iconState ? (<Pressable onPress = {() => setIconState(false)}>
